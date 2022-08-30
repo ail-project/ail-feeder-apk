@@ -25,21 +25,14 @@ if 'ail' in config:
     ail_key = config['ail']['apikey']
 
 
-def pushToAIl(data, meta):
+def pushToAil(data, meta):
     """Push json to AIL"""
     default_encoding = 'UTF-8'
-
-    json_pdf = dict()
-    json_pdf['data'] = data
-    json_pdf['meta'] = meta
 
     source = 'apk-feeder'
     source_uuid = uuid
 
-    if debug:
-        print(json_pdf)
-    else:
-        pyail.feed_json_item(data, meta, source, source_uuid, default_encoding)
+    pyail.feed_json_item(data, meta, source, source_uuid, default_encoding)
 
 
 #############
@@ -68,8 +61,6 @@ elif args.database:
     with env.begin() as txn:
         cursor = txn.cursor()
         for key, value in cursor:
-            print(value.decode('utf-8'))
+            pushToAil(key.decode('utf-8'),value.decode('utf-8'))
 
     env.close()
-
-    #pushToAIl(data, meta)
