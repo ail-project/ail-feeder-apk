@@ -1,6 +1,7 @@
 import os 
 import argparse
 import configparser
+import lmdb
 from pyail import PyAIL
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -46,21 +47,18 @@ def pushToAIl(data, meta):
 #############
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-b", "--database", help="lmdb file to open", action="store_true")
-parser.add_argument("-d", "--debug", help="debug mode", action="store_true")
+parser.add_argument("database", help="lmdb folder to open")
 parser.add_argument("-v", "--verbose", help="display more info", action="store_true")
 args = parser.parse_args()
 
-debug = args.debug
 verbose = args.verbose
 
 ## Ail
-if not debug:
-    try:
-        pyail = PyAIL(ail_url, ail_key, ssl=False)
-    except Exception as e:
-        print("\n\n[-] Error during creation of AIL instance")
-        exit(0)
+try:
+    pyail = PyAIL(ail_url, ail_key, ssl=False)
+except Exception as e:
+    print("\n\n[-] Error during creation of AIL instance")
+    exit(0)
 
 if not args.database:
     print("Error passing database file")
