@@ -1,0 +1,6 @@
+[general]
+uuid = 8f8ca4f7-a5f5-4bf9-9f65-1c207b84f2e2
+
+[ail]
+url = https://127.0.0.1:7000
+apikey = <YOURAPIKEY> 
