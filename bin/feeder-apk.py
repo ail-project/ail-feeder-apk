@@ -32,7 +32,7 @@ def pushToAil(data, meta):
     source = 'apk-feeder'
     source_uuid = uuid
 
-    pyail.feed_json_item(data, meta, source, source_uuid, default_encoding)
+    pyail.feed_json_item(meta, data, source, source_uuid, default_encoding)
 
 
 #############
