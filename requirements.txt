@@ -1,1 +1,7 @@
+wheel
 pyail
+androguard
+lmdb
+lxml
+asn1crypto
+python-magic
