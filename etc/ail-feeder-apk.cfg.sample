@@ -4,3 +4,31 @@ uuid = 8f8ca4f7-a5f5-4bf9-9f65-1c207b84f2e2
 [ail]
 url = https://127.0.0.1:7000
 apikey = <YOURAPIKEY> 
+
+[raccooon]
+exec = <PATHTORACCOONJAR>
+homefolder = <PATHTORACCOONAPPSFOLDER> 
+
+[scrapper]
+baselinekeywords = [<KEYWORDSTOBUILDBASELINE>]
+huntkeywords = [<KEYWORDSTOHUNTFOR>]
+max_reviews = <MAXIMUMNUMBEROFREVIEWSTORETRIEVE>
+
+[lmdb]
+scrapdb = <SCRAPINGLMDB> 
+baselinedb = <BASELINELMDB>
+huntdb = <HUNTLMDB>
+tmpdb = <TMPLMDB>
+
+[lmdb]
+baselinedb = "baseline"
+huntdb = "hunt" 
+tmpdb = "tmp"
+
+[bloomfilter]
+bfpath = <PATHTOBLOOMFILTERFILE>
+case = <0: LOWER, 1: UPPER, 2: BOTH>
+
+[filter]
+certificatessha256 = [<TRUSTED1>, <TRUSTED2>, etc.]
+publisher = <PUBLISHERID>
