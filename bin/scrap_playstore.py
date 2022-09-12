@@ -20,7 +20,6 @@ if __name__ == '__main__':
     if 'scrapper' in config:
         bk = config['scrapper']['baselinekeywords']
         hk = config['scrapper']['huntkeywords']
-        c = config['scrapper']['certificatessha1']
         limit = int(config['scrapper']['max_reviews'])
 
     if 'lmdb' in config:
@@ -42,5 +41,5 @@ if __name__ == '__main__':
     else:
         mode = sys.argv[1]
         if mode:
-            scrap.scrap_task(mode, bk, hk, c, limit, scrapdb, huntdb, baselinekeywords, huntkeywords, certificatessha1)
+            scrap.scrap_task(mode, bk, hk, limit, scrapdb, huntdb, baselinekeywords, huntkeywords, certificatessha1)
 
