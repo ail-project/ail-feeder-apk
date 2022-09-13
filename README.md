@@ -42,6 +42,7 @@ rule andro_fleur
         androguard.image(0) == 1
 }
 ```
+8. `bin/analysis.py hunting <some.apk>` can be used to add an local apk file to the `hunt` lmdb.
 
 # Requirements
 This feeder has several requirements for the AIL instances to treat its input correctly:
@@ -51,3 +52,5 @@ This feeder has several requirements for the AIL instances to treat its input co
   - an AIL fork with the correct yara version is available here: https://github.com/gallypette/ail-framework/tree/custoyara
 
 - raccoon 4 needs to be installed and configured to use a google account, see https://raccoon.onyxbits.de/documentation/
+
+# Remarks and Future Works

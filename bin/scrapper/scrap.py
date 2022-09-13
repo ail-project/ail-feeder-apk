@@ -3,7 +3,7 @@ import json
 import lmdb
 import os
 
-def scrap_task(mode, bk, hk, limit, scrapdb, huntdb, baselinekeywords, huntkeywords, certificatessha1):
+def scrap_task(mode, bk, hk, limit, scrapdb, huntdb, baselinekeywords, huntkeywords):
     env: lmdb.Environment
     search_terms = []
     if mode == "baselining":

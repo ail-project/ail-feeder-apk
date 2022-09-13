@@ -33,7 +33,6 @@ if __name__ == '__main__':
     if 'scrapper' in config:
         baselinekeywords = config['scrapper']['baselinekeywords'].split(',')
         huntkeywords = config['scrapper']['huntkeywords'].split(',')
-        certificatessha1 = config['scrapper']['certificatessha1'].split(',')
 
     if len(sys.argv) != 2:
         print("Usage : scrap_playstore mode")
@@ -41,5 +40,5 @@ if __name__ == '__main__':
     else:
         mode = sys.argv[1]
         if mode:
-            scrap.scrap_task(mode, bk, hk, limit, scrapdb, huntdb, baselinekeywords, huntkeywords, certificatessha1)
+            scrap.scrap_task(mode, bk, hk, limit, scrapdb, huntdb, baselinekeywords, huntkeywords)
 
