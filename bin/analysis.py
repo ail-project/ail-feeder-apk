@@ -23,7 +23,7 @@ if __name__ == '__main__':
         if not os.path.isabs(scrapdb):
             scrapdb = os.path.join(parentFolder, scrapdb)
         huntdb = config['lmdb']['huntdb']
-        if not os.path.isabs(scrapdb):
+        if not os.path.isabs(huntdb):
             huntdb = os.path.join(parentFolder, huntdb)
         baselinedb = config['lmdb']['baselinedb']
         if not os.path.isabs(baselinedb):

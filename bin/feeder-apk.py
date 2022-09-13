@@ -3,12 +3,12 @@ import argparse
 import configparser
 import lmdb
 from pyail import PyAIL
+from pathlib import Path
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
+parentFolder = Path(__file__).resolve().parent.parent
+pathConf = os.path.join(parentFolder, "etc/ail-feeder-apk.cfg")
+
 uuid = "6afb365f-a0ec-48c2-bed9-1e82942cc0b7"
-
-## Config
-pathConf = '../etc/ail-feeder-apk.cfg'
 
 if os.path.isfile(pathConf):
     config = configparser.ConfigParser()
@@ -23,7 +23,18 @@ if 'general' in config:
 if 'ail' in config:
     ail_url = config['ail']['url']
     ail_key = config['ail']['apikey']
+else:
+    print("Need AIL config")
+    exit()
 
+if 'lmdb' in config:
+    huntdb = config['lmdb']['huntdb']
+    if not os.path.isabs(huntdb):
+        huntdb = os.path.join(parentFolder, huntdb)
+else:
+    print("Need huntting database")
+    exit()
+    
 
 def pushToAil(data, meta):
     """Push json to AIL"""
@@ -34,33 +45,16 @@ def pushToAil(data, meta):
 
     pyail.feed_json_item(meta, data, source, source_uuid, default_encoding)
 
-
-#############
-# Arg Parse #
-#############
-
-parser = argparse.ArgumentParser()
-parser.add_argument("database", help="lmdb folder to open")
-parser.add_argument("-v", "--verbose", help="display more info", action="store_true")
-args = parser.parse_args()
-
-verbose = args.verbose
-
-## Ail
 try:
     pyail = PyAIL(ail_url, ail_key, ssl=False)
 except Exception as e:
     print("\n\n[-] Error during creation of AIL instance")
     exit(0)
 
-if not args.database:
-    print("Error passing database file")
-    exit(0)
-elif args.database:
-    env = lmdb.open(args.database, readonly = True)
-    with env.begin() as txn:
-        cursor = txn.cursor()
-        for key, value in cursor:
-            pushToAil(key.decode('utf-8'),value.decode('utf-8'))
+env = lmdb.open(huntdb, readonly = True)
+with env.begin() as txn:
+    cursor = txn.cursor()
+    for key, value in cursor:
+        pushToAil(key.decode('utf-8'),value.decode('utf-8'))
 
-    env.close()
+env.close()
