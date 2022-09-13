@@ -29,7 +29,6 @@ if __name__ == '__main__':
     if 'scrapper' in config:
         baselinekeywords = config['scrapper']['baselinekeywords'].split(',')
         huntkeywords = config['scrapper']['huntkeywords'].split(',')
-        certificatessha1 = config['scrapper']['certificatessha1'].split(',')
         limit = int(config['scrapper']['max_reviews'])
 
     if 'raccoon' in config:
