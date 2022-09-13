@@ -46,6 +46,7 @@ if __name__ == '__main__':
     if 'raccoon' in config:
         homefolder = config['raccoon']['homefolder']
 
+    one_apk = ""
     if (len(sys.argv) < 2) or (sys.argv[1] not in ['baselining', 'hunting']) or (len(sys.argv) > 3):
         print("Usage : analysis <mode>")
         exit()
@@ -56,7 +57,8 @@ if __name__ == '__main__':
             exit()
         else:
             mode = "adding"
+            one_apk = sys.argv[2]
     else:
         mode = sys.argv[1]
     
-    androguard_fingerprinter.generate_lmdb_report(mode, bk, hk, certificate, scrapdb, huntdb, baselinedb, certificate, publisher, bfpath, case, homefolder, sys.argv[2])
+    androguard_fingerprinter.generate_lmdb_report(mode, bk, hk, certificate, scrapdb, huntdb, baselinedb, certificate, publisher, bfpath, case, homefolder, one_apk)
