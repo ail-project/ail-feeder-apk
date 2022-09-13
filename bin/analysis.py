@@ -3,10 +3,11 @@ import sys
 import os
 import configparser
 import pathlib
+from pathlib import Path 
 
 if __name__ == '__main__':
 
-    parentFolder = pathlib.Path(__file__).resolve().parent.parent
+    parentFolder = Path(__file__).resolve().parent.parent
     pathConf = os.path.join(parentFolder, "etc/ail-feeder-apk.cfg")
 
     ## Config
@@ -45,10 +46,17 @@ if __name__ == '__main__':
     if 'raccoon' in config:
         homefolder = config['raccoon']['homefolder']
 
-    if len(sys.argv) != 2:
-        print("Usage : analysis mode")
+    if (len(sys.argv) < 2) or (sys.argv[1] not in ['baselining', 'hunting']) or (len(sys.argv) > 3):
+        print("Usage : analysis <mode>")
         exit()
+    elif (len(sys.argv) == 3):
+        apk = Path(sys.argv[2])
+        if not Path.is_file(apk):
+            print("Usage : analysis hunting blah.apk (where blah.apk is a file)")
+            exit()
+        else:
+            mode = "adding"
     else:
         mode = sys.argv[1]
-        if mode:
-            androguard_fingerprinter.generate_lmdb_report(mode, bk, hk, certificate, scrapdb, huntdb, baselinedb, certificate, publisher, bfpath, case, homefolder)
+    
+    androguard_fingerprinter.generate_lmdb_report(mode, bk, hk, certificate, scrapdb, huntdb, baselinedb, certificate, publisher, bfpath, case, homefolder, sys.argv[2])

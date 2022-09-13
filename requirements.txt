@@ -7,3 +7,4 @@ asn1crypto
 python-magic
 google-play-scraper
 flor
+uuid
