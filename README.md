@@ -54,3 +54,14 @@ This feeder has several requirements for the AIL instances to treat its input co
 - raccoon 4 needs to be installed and configured to use a google account, see https://raccoon.onyxbits.de/documentation/
 
 # Remarks and Future Works
+
+- At the moment the tool produces way too many false positive `androfleur` should return a match count instead of success/failure. This would allow for yara rules to trigger only above a threashold.
+- databases of known files could be queried (or their filters) to filter out false positives.
+- the tool could mine playstore comments and score for threat detection.
+- additional an dex decompilation step can produce intereseting detection means.
+
+# Acknowledgment
+
+![](./img/cef.png)
+
+The project has been co-funded by CEF-TC-2020-2 - 2020-EU-IA-0260 - JTAN - Joint Threat Analysis Network.
